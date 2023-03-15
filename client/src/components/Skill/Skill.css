@@ -1,0 +1,38 @@
+.skills {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.skills li {
+    margin: 4px 0;
+    display: flex;
+    justify-content: space-around;
+    border: #F76C6C 1px solid;
+    border-radius: 4px;
+    padding: 2px;
+}
+
+.skills .votes {
+    /* Center the content */
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+    /* Colors */
+    background-color: rgba(0, 0, 0, .3);
+    color: #FFF;
+
+    /* Rounded border */
+    border-radius: 9999px;
+    height: 20px;
+    width: 20px;
+}
+
+.skills .delete-btn {
+    margin: 0 3px;
+    cursor: pointer;
+}
