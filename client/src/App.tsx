@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
-
 import "./App.css";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import Home from "./pages/Home";
+import { WildersProvider } from "./utils/context";
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <Home />
+      <WildersProvider>
+        <Home />
+      </WildersProvider>
       <Footer />
     </div>
   );
