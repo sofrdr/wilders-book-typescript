@@ -1,0 +1,6 @@
+PUT http://localhost:5000/api/wilders/1
+Content-Type: application/json
+
+{
+    "email": "sophie@test.fr"
+}

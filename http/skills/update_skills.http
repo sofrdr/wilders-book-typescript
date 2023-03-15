@@ -1,0 +1,6 @@
+PUT http://localhost:5000/api/skills/2
+Content-Type: application/json
+
+{
+    "name": "Node"
+}

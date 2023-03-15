@@ -1,0 +1,2 @@
+POST http://localhost:5000/api/wilders/1/skill/2/add
+Content-Type: application/json
