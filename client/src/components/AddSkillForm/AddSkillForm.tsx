@@ -1,16 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { WildersContext } from "../../utils/context/wildersContext";
 import ISkill from "../../utils/interfaces/ISkill";
+import "./AddSkillForm.css";
 
 type AddSkillFormProps = {
   wilderId: number;
-  toggleForm: React.Dispatch<React.SetStateAction<boolean>>;
+  //toggleForm: React.Dispatch<React.SetStateAction<boolean>>;
+  toggleForm: any;
 };
 
 const AddSkillForm = ({ wilderId, toggleForm }: AddSkillFormProps) => {
   const [skillsList, setSkillsList] = useState<ISkill[]>([]);
   const url = "http://localhost:5000/api/skills";
 
+  // Get fetchData function from context
+  const { fetchData } = useContext(WildersContext);
+
+  // Function to get all skills from BDD
   const getSkills = async () => {
     try {
       const response = await fetch(url);
@@ -25,11 +32,7 @@ const AddSkillForm = ({ wilderId, toggleForm }: AddSkillFormProps) => {
     getSkills();
   }, []);
 
-  // Create an array with skills' name only
-  const skillsName = skillsList.map((skill) => {
-    return skill.name;
-  });
-
+  // Function to add a specific skill to a wilder
   const addSkillToWilder = async (skillId: number, wilderId: number) => {
     try {
       const response = await fetch(
@@ -43,6 +46,7 @@ const AddSkillForm = ({ wilderId, toggleForm }: AddSkillFormProps) => {
       );
       const data = await response.json();
       console.log(data);
+      fetchData();
     } catch (error) {
       console.log(error);
     }
@@ -57,9 +61,12 @@ const AddSkillForm = ({ wilderId, toggleForm }: AddSkillFormProps) => {
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>();
+
+  // When the form is submitted
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     const { skill } = data;
     addSkillToWilder(skill, wilderId);
+    toggleForm();
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="add-skill-form">
@@ -71,10 +78,14 @@ const AddSkillForm = ({ wilderId, toggleForm }: AddSkillFormProps) => {
           </option>
         ))}
       </select>
-
-      <button type="submit" className="button">
-        Submit
-      </button>
+      <div className="form-buttons">
+        <button type="submit" className="button">
+          Submit
+        </button>
+        <button className="button" onClick={toggleForm}>
+          Close
+        </button>
+      </div>
     </form>
   );
 };

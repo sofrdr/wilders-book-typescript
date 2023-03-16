@@ -3,14 +3,17 @@ import Iwilder from "../interfaces/IWilder";
 
 interface WildersContextProps {
   wilders: Iwilder[];
+  fetchData: () => void | Promise<void>;
 }
 
 export const WildersContext = createContext<WildersContextProps>({
   wilders: [],
+  fetchData: () => {},
 });
 
 export const WildersProvider = ({ children }: PropsWithChildren) => {
   const [wilders, setWilders] = useState<Iwilder[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const url = "http://localhost:5000/api/wilders";
   const fetchData = async () => {
     try {
@@ -30,6 +33,7 @@ export const WildersProvider = ({ children }: PropsWithChildren) => {
     <WildersContext.Provider
       value={{
         wilders,
+        fetchData,
       }}
     >
       {children}

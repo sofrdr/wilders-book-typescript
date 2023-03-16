@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { ImBin2 } from "react-icons/im";
 import ProfileImg from "../../assets/blank_profile.png";
 import Skill from "../Skill/Skill";
 import "./Wilder.css";
 import Iwilder from "../../utils/interfaces/IWilder";
 import AddSkillForm from "../AddSkillForm/AddSkillForm";
+import { WildersContext } from "../../utils/context/wildersContext";
 
 export type WilderProps = Iwilder;
 
@@ -17,6 +18,8 @@ const Wilder = ({ id, name, city, email, skills }: WilderProps) => {
     setIsFormOpen(!isFormOpen);
   };
 
+  const { fetchData } = useContext(WildersContext);
+
   const removeWilder = async (id: number) => {
     try {
       const response = await fetch(`${url}/${id}`, {
@@ -24,6 +27,7 @@ const Wilder = ({ id, name, city, email, skills }: WilderProps) => {
       });
       const data = await response.json();
       console.log(data);
+      fetchData();
     } catch (error) {
       console.log(error);
     }
@@ -56,9 +60,9 @@ const Wilder = ({ id, name, city, email, skills }: WilderProps) => {
 
       <h4>Contact</h4>
       <p>{email}</p>
-      <button onClick={() => removeWilder(id)} className="delete-button">
+      <div onClick={() => removeWilder(id)} className="delete-button">
         <ImBin2 />
-      </button>
+      </div>
     </article>
   );
 };

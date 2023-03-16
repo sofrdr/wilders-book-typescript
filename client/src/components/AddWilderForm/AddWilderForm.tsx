@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { WildersContext } from "../../utils/context/wildersContext";
 import "./AddWilderForm.css";
 
 const url = "http://localhost:5000/api/wilders";
@@ -12,6 +13,7 @@ type Inputs = {
 
 const AddWilderForm = () => {
   const [errorMsg, setErrorMsg] = useState<String>("");
+  const { fetchData } = useContext(WildersContext);
   const addWilder = async (wilder: Inputs) => {
     try {
       const response = await fetch(url, {
@@ -22,6 +24,7 @@ const AddWilderForm = () => {
         body: JSON.stringify(wilder),
       });
       const data = await response.json();
+      fetchData();
       if (data.error) {
         setErrorMsg(data.error);
       }
