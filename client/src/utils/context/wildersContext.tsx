@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, PropsWithChildren } from "react";
-import Iwilder from "./interfaces/IWilder";
+import Iwilder from "../interfaces/IWilder";
 
 interface WildersContextProps {
   wilders: Iwilder[];

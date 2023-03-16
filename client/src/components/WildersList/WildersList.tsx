@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { WildersContext } from "../../utils/context";
+import { WildersContext } from "../../utils/context/wildersContext";
 import Wilder from "../Wilder/Wilder";
 
 const WildersList = () => {
