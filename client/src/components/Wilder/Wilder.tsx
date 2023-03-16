@@ -1,5 +1,5 @@
 import React from "react";
-
+import { ImBin2 } from "react-icons/im";
 import ProfileImg from "../../assets/blank_profile.png";
 import Skill from "../Skill/Skill";
 import "./Wilder.css";
@@ -7,6 +7,20 @@ import Iwilder from "../../utils/interfaces/IWilder";
 
 export type WilderProps = Iwilder;
 const Wilder = ({ id, name, city, email, skills }: WilderProps) => {
+  const url = "http://localhost:5000/api/wilders";
+
+  const removeWilder = async (id: number) => {
+    try {
+      const response = await fetch(`${url}/${id}`, {
+        method: "DELETE",
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <article className="card">
       <img src={ProfileImg} alt={`${name} Profile`} />
@@ -26,6 +40,9 @@ const Wilder = ({ id, name, city, email, skills }: WilderProps) => {
       </ul>
       <h4>Contact</h4>
       <p>{email}</p>
+      <button onClick={() => removeWilder(id)} className="delete-button">
+        <ImBin2 />
+      </button>
     </article>
   );
 };
