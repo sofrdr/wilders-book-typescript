@@ -1,18 +1,12 @@
 import React from "react";
-import { ISkillProps } from "../Skill/Skill";
+
 import ProfileImg from "../../assets/blank_profile.png";
 import Skill from "../Skill/Skill";
 import "./Wilder.css";
+import Iwilder from "../../utils/interfaces/IWilder";
 
-export interface IWilderProps {
-  id: number;
-  name: string;
-  city?: string;
-  email: string;
-  skills?: ISkillProps[];
-}
-
-const Wilder = ({ id, name, city, email, skills }: IWilderProps) => {
+export type WilderProps = Iwilder;
+const Wilder = ({ id, name, city, email, skills }: WilderProps) => {
   return (
     <article className="card">
       <img src={ProfileImg} alt={`${name} Profile`} />
@@ -26,10 +20,8 @@ const Wilder = ({ id, name, city, email, skills }: IWilderProps) => {
       </p>
       <h4>Wild Skills</h4>
       <ul className="skills">
-        {skills?.map((skill, i) => {
-          return (
-            <Skill key={i} name={skill.name} id={skill.id} wilderId={id} />
-          );
+        {skills?.map((skill) => {
+          return <Skill key={skill.id} {...skill} wilderId={id} />;
         })}
       </ul>
       <h4>Contact</h4>
