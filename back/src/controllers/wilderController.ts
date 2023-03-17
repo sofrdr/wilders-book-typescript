@@ -39,9 +39,9 @@ export const wilderController: IController = {
         await appDataSource.getRepository(Wilder).save(req.body);
       }
 
-      return res.status(201).send({ message: "New wilder created" });
+      res.status(201).send({ message: "New wilder created" });
     } catch (error) {
-      return res.status(400).send({ error: error.message });
+      res.status(400).send({ error: error.message });
     }
   },
 
@@ -78,7 +78,7 @@ export const wilderController: IController = {
       if (!wilder) {
         return res.status(404).send({ error: "No wilder found" });
       }
-      if (wilder.image !== null) {
+      if (wilder.image !== "undefined") {
         const filename = wilder.image.split("/images/")[1];
         fs.unlink("images/" + filename, (err) => {
           if (err) {

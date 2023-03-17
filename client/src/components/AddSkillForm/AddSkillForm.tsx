@@ -6,8 +6,7 @@ import "./AddSkillForm.css";
 
 type AddSkillFormProps = {
   wilderId: number;
-  //toggleForm: React.Dispatch<React.SetStateAction<boolean>>;
-  toggleForm: any;
+  toggleForm: () => void;
 };
 
 const AddSkillForm = ({ wilderId, toggleForm }: AddSkillFormProps) => {

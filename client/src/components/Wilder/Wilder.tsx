@@ -35,7 +35,10 @@ const Wilder = ({ id, name, city, email, skills, image }: WilderProps) => {
 
   return (
     <article className="card">
-      <img src={image ? image : ProfileImg} alt={`${name} Profile`} />
+      <img
+        src={image !== "undefined" ? image : ProfileImg}
+        alt={`${name} Profile`}
+      />
       <h3>{name}</h3>
       <h4>{city}</h4>
       <p>
