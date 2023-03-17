@@ -36,8 +36,16 @@ const AddWilderForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    defaultValues: {
+      name: "",
+      city: "",
+      email: "",
+      image: "",
+    },
+  });
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const formData = new FormData();
     formData.append("name", data.name);
@@ -45,6 +53,7 @@ const AddWilderForm = () => {
     formData.append("city", data.city);
     data.image && formData.append("image", data.image[0]);
     addWilder(formData);
+    reset();
   };
 
   return (
@@ -66,7 +75,7 @@ const AddWilderForm = () => {
 
           <div className="form-input">
             <label>City</label>
-            <input {...register("city")} />
+            <input {...register("city")} defaultValue="" />
           </div>
           <div className="form-input">
             <label>Avatar</label>

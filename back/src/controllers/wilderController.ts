@@ -89,7 +89,7 @@ export const wilderController: IController = {
       const data = await appDataSource
         .getRepository(Wilder)
         .delete(req.params.id);
-      return res.status(200).send(data);
+      return res.status(200).send({ message: "Wilder deleted" });
     } catch (error) {
       return res.status(400).send({ error });
     }
