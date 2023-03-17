@@ -9,7 +9,7 @@ import { WildersContext } from "../../utils/context/wildersContext";
 
 export type WilderProps = Iwilder;
 
-const Wilder = ({ id, name, city, email, skills }: WilderProps) => {
+const Wilder = ({ id, name, city, email, skills, image }: WilderProps) => {
   const url = "http://localhost:5000/api/wilders";
 
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
@@ -35,7 +35,7 @@ const Wilder = ({ id, name, city, email, skills }: WilderProps) => {
 
   return (
     <article className="card">
-      <img src={ProfileImg} alt={`${name} Profile`} />
+      <img src={image ? image : ProfileImg} alt={`${name} Profile`} />
       <h3>{name}</h3>
       <h4>{city}</h4>
       <p>

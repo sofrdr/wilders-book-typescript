@@ -1,5 +1,6 @@
 import cors from "cors";
 import express from "express";
+import path from "path";
 import appDataSource from "./utils";
 import { wildersRoutes } from "./routes/wilder-routes";
 import { skillsRoutes } from "./routes/skill-routes";
@@ -8,6 +9,7 @@ const app = express();
 
 app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.json());
+app.use("/images", express.static(path.join(__dirname, "../images")));
 app.use("/api/wilders", wildersRoutes);
 app.use("/api/skills", skillsRoutes);
 

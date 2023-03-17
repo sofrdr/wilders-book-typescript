@@ -6,4 +6,5 @@ export default interface Iwilder {
   email: string;
   city?: string;
   skills?: ISkill[];
+  image: string;
 }

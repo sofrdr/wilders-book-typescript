@@ -3,6 +3,7 @@ import { Wilder } from "../entities/Wilder";
 import { Skill } from "../entities/Skill";
 import validator from "validator";
 import { Express, Response, Request } from "express";
+import fs from "fs";
 
 interface IController {
   [key: string]: (arg0: Request, arg1: Response) => {};
@@ -25,10 +26,20 @@ export const wilderController: IController = {
       if (!name || !city) {
         throw new Error("One of the fields is empty");
       }
-      const newWilder = await appDataSource
-        .getRepository(Wilder)
-        .save(req.body);
-      return res.status(201).send({ newWilder, message: "New wilder created" });
+
+      if (req.file) {
+        const image = `${req.protocol}://${req.get("host")}/images/${
+          req.file.filename
+        }`;
+        const { name, email, city } = req.body;
+        await appDataSource
+          .getRepository(Wilder)
+          .save({ image, name, city, email });
+      } else {
+        await appDataSource.getRepository(Wilder).save(req.body);
+      }
+
+      return res.status(201).send({ message: "New wilder created" });
     } catch (error) {
       return res.status(400).send({ error: error.message });
     }

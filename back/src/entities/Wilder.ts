@@ -12,8 +12,11 @@ export class Wilder {
   @Column({ unique: true })
   email: string;
 
-  @Column({ nullable: true })
+  @Column()
   city: string;
+
+  @Column({ nullable: true })
+  image: string;
 
   @ManyToMany(() => Skill, (skill) => skill.wilders, {
     eager: true,

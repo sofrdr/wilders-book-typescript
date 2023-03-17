@@ -4,6 +4,7 @@ import Wilder from "../Wilder/Wilder";
 
 const WildersList = () => {
   const { wilders } = useContext(WildersContext);
+  console.log(wilders);
   return (
     <section>
       <h2>Wilders</h2>
