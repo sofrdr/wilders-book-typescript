@@ -78,6 +78,14 @@ export const wilderController: IController = {
       if (!wilder) {
         return res.status(404).send({ error: "No wilder found" });
       }
+      if (wilder.image !== null) {
+        const filename = wilder.image.split("/images/")[1];
+        fs.unlink("images/" + filename, (err) => {
+          if (err) {
+            throw err;
+          }
+        });
+      }
       const data = await appDataSource
         .getRepository(Wilder)
         .delete(req.params.id);
